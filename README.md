@@ -9,6 +9,7 @@
 
 
 <p align="center">
+  picks a random frame from a dir of videos and copy it to destination path
 </p>
 
 License
