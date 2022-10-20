@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+file_count=$(find . | wc -l)
+
+number=$(shuf -i 1-"$file_count" -n 1)
+od -A n -N 2 -t u2 /dev/urandom
+head -200 /dev/urandom | cksum
+head -200 /dev/urandom | cksum | cut -f1 -d " "
+echo $(( $RANDOM % 50 + 1 ))
+
+echo "$file_count :: file_count"
+echo "$number :: number"
+# ffmpeg -i Cyberpunk-Edgerunners-.mkv -vf fps=1/60 img%03d.jpg
+
+# ffmpeg -i Cyberpunk-Edgerunners-.mkv -vf fps=1/60 img%03d.jpg
+
