@@ -1,15 +1,46 @@
 #!/usr/bin/env bash
 
-file_count=$(find . | wc -l)
+file=$(find "$1" -type f | shuf -n 1)
+echo "$file :: file"
 
-number=$(shuf -i 1-"$file_count" -n 1)
-od -A n -N 2 -t u2 /dev/urandom
-head -200 /dev/urandom | cksum
-head -200 /dev/urandom | cksum | cut -f1 -d " "
-echo $(( $RANDOM % 50 + 1 ))
+output="$2"
 
-echo "$file_count :: file_count"
-echo "$number :: number"
+total_frames="$(mediainfo  --Output="Video;%FrameCount%" "$file")"
+echo "$total_frames :: total_frames"
+
+random_frame=$[RANDOM % total_frames]
+echo "$random_frame :: random_frame"
+
+# fps="$(ffmpeg -i "$file" -vcodec copy -acodec copy -f null /dev/null 2>&1 | sed -n "s/.*, \(.*\) tbr.*/\1/p" | head -n 1)"
+# fps="$(ffprobe "$file" 2>&1| grep ",* fps" | cut -d "," -f 5 | cut -d " " -f 2)"
+fps="$(mediainfo "$file" "--inform=Video;%FrameRate%" | cut -d '.' -f 1)"
+echo "$fps :: fps"
+
+time=$((random_frame/fps))
+echo "$time :: time"
+
+ffmpeg -y -ss "$time" -i "$file" -frames 1 -s 1920x1080 -f image2 "$output"
+
+# ffmpeg -ss 01:10 -i "$file" -frames 1 -s 1920x1080 -f image2 "$output"
+# ffmpeg -y -i "$file" -vf "select=eq(n\,35)" -vframes 1 "$output"
+
+# ffmpeg -i "$file" -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep frame | cut -d ' ' -f 1 | sed s/frame=//
+# echo "$TOTAL_FRAMES :: TOTAL_FRAMES"
+# ffmpeg -ss 01:10 -y -i "$file" -frames 1 -s 1920x1080 -f image2 /home/meta/pics/wall/curr-1.png
+
+# number=$(shuf -i 1-"$file_count" -n 1)
+# od -A n -N 2 -t u2 /dev/urandom
+# head -200 /dev/urandom | cksum
+# head -200 /dev/urandom | cksum | cut -f1 -d " "
+# echo ">> $(( $RANDOM % $file_count + 1 ))"
+
+# echo "$file_count :: file_count"
+# echo "$number :: number"
+
+# ffmpeg -ss 01:10 -i Cyberpunk-Edgerunners-0"$number".mkv -frames 1 -s 1920x1080 -f image2 /home/meta/pics/wall/curr-1.png
+# ffmpeg -ss 01:10 -y -i /usr/local/meta/tr/Cyberpunk-Edgerunners/Cyberpunk-Edgerunners-0"$number".mkv -frames 1 -s 1920x1080 -f image2 /home/meta/pics/wall/curr-1.png
+
+
 # ffmpeg -i Cyberpunk-Edgerunners-.mkv -vf fps=1/60 img%03d.jpg
 
 # ffmpeg -i Cyberpunk-Edgerunners-.mkv -vf fps=1/60 img%03d.jpg
