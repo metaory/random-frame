@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+INPUT=${1:?arg_missing_input}
+OUTPT=${2:?arg_missing_input}
+
 log () {
   while [ "$1" ]; do
     echo "$1: ${!1}"
@@ -7,11 +10,11 @@ log () {
   done
 }
 
-input=$(find "$1" -type f | shuf -n 1)
-output="$2"
+input=$(find "$INPUT" -type f -name "*.mkv" | shuf -n 1)
+output="$OUTPT"
 
 log input output
-echo ---------
+echo -----------
 
 total_frames="$(mediainfo  --Output="Video;%FrameCount%" "$input")"
 
