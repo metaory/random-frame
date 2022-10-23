@@ -20,10 +20,14 @@ Installation
 
     chmod +x random-frame
 
-place the file in your path
+- place the file in your path
 
 Usage
 =====
+    random-frame <video-dir> <output>
+
+Example
+=======
     random-frame /home/meta/videos/cyberpunk /home/meta/pics/wall.png
 
 License
