@@ -1,3 +1,6 @@
+<picture>
+  <img width="90%" alt="mxflow" src="https://raw.githubusercontent.com/metaory/random-frame/main/random-frame.png">
+</picture>
 <p align="center">
   <br>
   <a href="#requirements">Requirements</a> |
