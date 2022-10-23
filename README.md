@@ -1,9 +1,9 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/metaory/random-frame/main/random-frame.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/metaory/random-frame/main/random-frame.png">
-  <img width="90%" alt="mxflow" src="https://raw.githubusercontent.com/metaory/random-frame/main/random-frame.png">
-</picture>
 <p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/metaory/random-frame/main/random-frame.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/metaory/random-frame/main/random-frame.png">
+    <img width="90%" alt="mxflow" src="https://raw.githubusercontent.com/metaory/random-frame/main/random-frame.png">
+  </picture>
   <br>
   <a href="#requirements">Requirements</a> |
   <a href="#installation">Installation</a> |
